@@ -4,12 +4,23 @@
     <title>Teste da API</title>
 </head>
 <body>
-    <h1>Teste da API de Usuários</h1>
+    <h1>Teste da API</h1>
     
+    <h2>Usuários</h2>
     <button onclick="listarUsuarios()">Listar Usuários</button>
     <button onclick="criarUsuario()">Criar Usuário</button>
     <button onclick="buscarUsuario()">Buscar Usuário ID 1</button>
-    
+
+    <h2>Projetos</h2>
+    <button onclick="listarProjetos()">Listar Projetos</button>
+    <button onclick="criarProjeto()">Criar Projeto</button>
+    <button onclick="buscarProjeto()">Buscar Projeto ID 1</button>
+
+    <h2>Tarefas</h2>
+    <button onclick="listarTarefas()">Listar Tarefas</button>
+    <button onclick="criarTarefa()">Criar Tarefa</button>
+    <button onclick="buscarTarefa()">Buscar Tarefa ID 1</button>
+
     <div id="resultado" class="resultado">
         Resultado aparecerá aqui...
     </div>
@@ -17,11 +28,8 @@
     <script>
         function listarUsuarios() {
             fetch('api/usuarios.php')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('resultado').innerHTML = 
-                        '<h3>Usuários:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
-                });
+                .then(r => r.json())
+                .then(d => mostrarResultado('Usuários', d));
         }
 
         function criarUsuario() {
@@ -33,25 +41,83 @@
 
             fetch('api/usuarios.php', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
             })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('resultado').innerHTML = 
-                    '<h3>Resultado:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
-            });
+            .then(r => r.json())
+            .then(d => mostrarResultado('Usuário criado', d));
         }
 
         function buscarUsuario() {
             fetch('api/usuarios.php?id=1')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('resultado').innerHTML = 
-                        '<h3>Usuário encontrado:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
-                });
+                .then(r => r.json())
+                .then(d => mostrarResultado('Usuário ID 1', d));
+        }
+
+        function listarProjetos() {
+            fetch('api/projetos.php')
+                .then(r => r.json())
+                .then(d => mostrarResultado('Projetos', d));
+        }
+
+        function criarProjeto() {
+            const dados = {
+                nome: 'Projeto Exemplo',
+                descricao: 'API teste',
+                data_inicio: '2025-08-01',
+                data_fim: '2025-08-30'
+            };
+
+            fetch('api/projetos.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(r => r.json())
+            .then(d => mostrarResultado('Projeto criado', d));
+        }
+
+        function buscarProjeto() {
+            fetch('api/projetos.php?id=1')
+                .then(r => r.json())
+                .then(d => mostrarResultado('Projeto ID 1', d));
+        }
+
+        function listarTarefas() {
+            fetch('api/tarefas.php')
+                .then(r => r.json())
+                .then(d => mostrarResultado('Tarefas', d));
+        }
+
+        function criarTarefa() {
+            const dados = {
+                titulo: 'Tarefa Teste',
+                descricao: 'Descrição da tarefa',
+                status: 'pendente',
+                prioridade: 'alta',
+                data_vencimento: '2025-08-10',
+                projeto_id: 1,
+                usuario_id: 1
+            };
+
+            fetch('api/tarefas.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(r => r.json())
+            .then(d => mostrarResultado('Tarefa criada', d));
+        }
+
+        function buscarTarefa() {
+            fetch('api/tarefas.php?id=1')
+                .then(r => r.json())
+                .then(d => mostrarResultado('Tarefa ID 1', d));
+        }
+
+        function mostrarResultado(titulo, dados) {
+            document.getElementById('resultado').innerHTML = 
+                `<h3>${titulo}:</h3><pre>${JSON.stringify(dados, null, 2)}</pre>`;
         }
     </script>
 </body>

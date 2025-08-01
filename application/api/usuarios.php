@@ -7,6 +7,8 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Incluir o controller
 include_once __DIR__ . '/../controllers/UsuarioController.php';
+include_once __DIR__ . '/../controllers/ProjetoController.php';
+include_once __DIR__ . '/../controllers/TarefaController.php';
 
 // Criar instância do controller
 $controller = new UsuarioController();
@@ -48,4 +50,3 @@ switch($method) {
         echo json_encode(["message" => "Método não permitido"]);
         break;
 }
-?>
