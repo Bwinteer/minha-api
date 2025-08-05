@@ -1,5 +1,7 @@
 <?php
-include_once __DIR__ . '/../services/TarefaService.php';
+namespace BrunaW\MinhaApi\Controllers;
+
+use BrunaW\MinhaApi\Services\TarefaService;
 
 class TarefaController {
     private $tarefaService;

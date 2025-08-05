@@ -1,5 +1,8 @@
 <?php
-include_once __DIR__ . '/../services/ProjetoService.php';
+namespace BrunaW\MinhaApi\Controllers;
+
+use BrunaW\MinhaApi\Services\ProjetoService;
+
 
 class ProjetoController {
     private $projetoService;

@@ -1,6 +1,9 @@
 <?php
-include_once __DIR__ . '/../models/ProjetoModel.php';
-include_once __DIR__ . '/../config/Database.php';
+namespace BrunaW\MinhaApi\Services;
+
+use BrunaW\MinhaApi\Config\Database;
+use BrunaW\MinhaApi\Models\ProjetoModel;
+use PDO;
 
 class ProjetoService {
     private $conn;

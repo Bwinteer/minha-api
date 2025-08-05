@@ -1,13 +1,15 @@
 <?php
-class UsuarioModel {
+namespace BrunaW\MinhaApi\Models;
+use PDO;
+
+class ProjetoModel {
     private $conn;
-    private $table_name = "usuarios";
+    private $table_name = "projetos";
+
     public $id;
     public $nome;
-    public $email;
-    public $telefone;
-    public $created_at;
-    public $updated_at;
+    public $descricao;
+    public $data_criacao;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -15,23 +17,21 @@ class UsuarioModel {
 
     public function create() {
         $query = "INSERT INTO " . $this->table_name . " 
-                  (nome, email, telefone) 
-                  VALUES (:nome, :email, :telefone)";
+                  (nome, descricao) 
+                  VALUES (:nome, :descricao)";
 
         $stmt = $this->conn->prepare($query);
 
         // Limpa os dados
         $this->nome = htmlspecialchars(strip_tags($this->nome));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->telefone = htmlspecialchars(strip_tags($this->telefone));
+        $this->descricao = htmlspecialchars(strip_tags($this->descricao));
 
         // Liga os parâmetros
         $stmt->bindParam(':nome', $this->nome);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':telefone', $this->telefone);
+        $stmt->bindParam(':descricao', $this->descricao);
 
         // Executa e retorna resultado
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
             return true;
         }
@@ -39,9 +39,9 @@ class UsuarioModel {
     }
 
     public function read() {
-        $query = "SELECT id, nome, email, telefone, created_at, updated_at 
+        $query = "SELECT id, nome, descricao, data_criacao 
                   FROM " . $this->table_name . " 
-                  ORDER BY created_at DESC";
+                  ORDER BY data_criacao DESC";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -50,7 +50,7 @@ class UsuarioModel {
     }
 
     public function readOne() {
-        $query = "SELECT id, nome, email, telefone, created_at, updated_at 
+        $query = "SELECT id, nome, descricao, data_criacao 
                   FROM " . $this->table_name . " 
                   WHERE id = :id 
                   LIMIT 0,1";
@@ -61,12 +61,10 @@ class UsuarioModel {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($row) {
+        if ($row) {
             $this->nome = $row['nome'];
-            $this->email = $row['email'];
-            $this->telefone = $row['telefone'];
-            $this->created_at = $row['created_at'];
-            $this->updated_at = $row['updated_at'];
+            $this->descricao = $row['descricao'];
+            $this->data_criacao = $row['data_criacao'];
             return true;
         }
         return false;
@@ -74,26 +72,22 @@ class UsuarioModel {
 
     public function update() {
         $query = "UPDATE " . $this->table_name . " 
-                  SET nome = :nome, email = :email, telefone = :telefone 
+                  SET nome = :nome, descricao = :descricao 
                   WHERE id = :id";
 
         $stmt = $this->conn->prepare($query);
 
         // Limpa os dados
         $this->nome = htmlspecialchars(strip_tags($this->nome));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->telefone = htmlspecialchars(strip_tags($this->telefone));
+        $this->descricao = htmlspecialchars(strip_tags($this->descricao));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
+        // Liga os parâmetros
         $stmt->bindParam(':nome', $this->nome);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':telefone', $this->telefone);
+        $stmt->bindParam(':descricao', $this->descricao);
         $stmt->bindParam(':id', $this->id);
 
-        if($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $stmt->execute();
     }
 
     public function delete() {
@@ -103,10 +97,7 @@ class UsuarioModel {
         $this->id = htmlspecialchars(strip_tags($this->id));
         $stmt->bindParam(':id', $this->id);
 
-        if($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $stmt->execute();
     }
 }
 ?>

@@ -1,6 +1,9 @@
 <?php
-include_once __DIR__ . '/../models/TarefaModel.php';
-include_once __DIR__ . '/../config/Database.php';
+namespace BrunaW\MinhaApi\Services;
+
+use BrunaW\MinhaApi\Config\Database;
+use BrunaW\MinhaApi\Models\TarefaModel;
+use PDO;
 
 class TarefaService {
     private $conn;

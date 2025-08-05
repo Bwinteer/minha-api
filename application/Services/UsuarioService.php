@@ -1,6 +1,9 @@
 <?php
-include_once __DIR__ . '/../config/database.php';
-include_once __DIR__ . '/../models/UsuarioModel.php';
+namespace BrunaW\MinhaApi\Services;
+
+use BrunaW\MinhaApi\Config\Database;
+use BrunaW\MinhaApi\Models\UsuarioModel;
+use PDO;
 
 class UsuarioService {
     private $db;

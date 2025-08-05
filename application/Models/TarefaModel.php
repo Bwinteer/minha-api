@@ -1,4 +1,7 @@
 <?php
+namespace BrunaW\MinhaApi\Models;
+use PDO;
+
 class TarefaModel {
     private $conn;
     private $table_name = "tarefas";
