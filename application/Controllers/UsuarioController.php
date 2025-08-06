@@ -30,7 +30,7 @@ class UsuarioController {
         }
     }
 
-    public function criarUsuario() {
+    public function criarUsuario($data) {
         // Pegar dados enviados (JSON)
         $data = json_decode(file_get_contents("php://input"));
         

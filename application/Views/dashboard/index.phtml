@@ -49,7 +49,7 @@
         }
 
         function buscarUsuario() {
-            fetch('/usuarios?id=1')
+            fetch('/usuarios/1')
                 .then(r => r.json())
                 .then(d => mostrarResultado('Usuário ID 1', d));
         }

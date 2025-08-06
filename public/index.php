@@ -13,9 +13,23 @@ $router->get('/usuarios/{id}', function($id) {
     return $controller->buscarUsuario($id);
 });
 
-$router->post('/usuarios/criar', function($id) {
+$router->post('/usuarios/criar', function() {
+    //Está lendo o conteúdo bruto da requisição
+    $json = file_get_contents('php://input');
+
+    //Decodifica o JSON em um array associativo
+    $dados = json_decode($json, true);
+
+    //Verifica se a decodificação foi bem-sucedida
+    if ($dados === null) {
+        // Envie uma resposta de erro se o JSON for inválido
+        header('Content-Type: application/json');
+        http_response_code(400); // Bad Request
+        return json_encode(['error' => 'JSON inválido.']);
+    }
+
     $controller = new UsuarioController();
-    return $controller->criarUsuario();
+    return $controller->criarUsuario($dados);
 });
 
 echo $router->run();
