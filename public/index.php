@@ -32,4 +32,14 @@ $router->post('/usuarios/criar', function() {
     return $controller->criarUsuario($dados);
 });
 
+$router->put('/usuarios/atualizar/{id}', function($id) {
+    $controller = new UsuarioController();
+    return $controller->atualizarUsuario($id);
+});
+
+$router->delete('/usuarios/delete/{id}', function($id) {
+    $controller = new UsuarioController();
+    return $controller->deletarUsuario($id);
+});
+
 echo $router->run();
