@@ -27,7 +27,7 @@
 
     <script>
         function listarUsuarios() {
-            fetch('api/usuarios.php')
+            fetch('/usuarios')
                 .then(r => r.json())
                 .then(d => mostrarResultado('Usuários', d));
         }
@@ -39,7 +39,7 @@
                 telefone: '(11) 99999-9999'
             };
 
-            fetch('api/usuarios.php', {
+            fetch('/usuarios', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
@@ -49,7 +49,7 @@
         }
 
         function buscarUsuario() {
-            fetch('api/usuarios.php?id=1')
+            fetch('/usuarios?id=1')
                 .then(r => r.json())
                 .then(d => mostrarResultado('Usuário ID 1', d));
         }
@@ -68,7 +68,7 @@
                 data_fim: '2025-08-30'
             };
 
-            fetch('api/projetos.php', {
+            fetch('/projetos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
@@ -78,13 +78,13 @@
         }
 
         function buscarProjeto() {
-            fetch('api/projetos.php?id=1')
+            fetch('/projetos?id=1')
                 .then(r => r.json())
                 .then(d => mostrarResultado('Projeto ID 1', d));
         }
 
         function listarTarefas() {
-            fetch('api/tarefas.php')
+            fetch('/tarefas')
                 .then(r => r.json())
                 .then(d => mostrarResultado('Tarefas', d));
         }
@@ -100,7 +100,7 @@
                 usuario_id: 1
             };
 
-            fetch('api/tarefas.php', {
+            fetch('/tarefas', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
@@ -110,7 +110,7 @@
         }
 
         function buscarTarefa() {
-            fetch('api/tarefas.php?id=1')
+            fetch('/tarefas?id=1')
                 .then(r => r.json())
                 .then(d => mostrarResultado('Tarefa ID 1', d));
         }

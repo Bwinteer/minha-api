@@ -60,4 +60,3 @@ class UsuarioController {
         echo json_encode(["message" => $resultado['message']]);
     }
 }
-?>

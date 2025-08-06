@@ -119,4 +119,3 @@ class TarefaModel {
         return $stmt->execute();
     }
 }
-?>
