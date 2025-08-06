@@ -1,6 +1,5 @@
 <?php
 namespace BrunaW\MinhaApi\Core;
-
 class View {
     private string $view;
     private function __construct(string $output) {
@@ -8,15 +7,19 @@ class View {
     }
 
     public static function make(string $view, $data = []): View {
+        // TRANSFORMA o array em variáveis:
+        // ['title' => 'Dashboard'] vira $title = 'Dashboard'
+        // ['user' => 'Bruna Teste'] vira $user = 'Bruna Teste'
         extract($data);
-        ob_start();
+        ob_start(); // Começa a "gravar" tudo que seria impresso
 
+        //Constrói o caminho do arquivo:
         $path = __DIR__ . "/../Views/{$view}.phtml";
         if (!file_exists($path)) {
             throw new \RuntimeException("View não encontrada: {$path}");
         }
-        require $path;
-        $output = ob_get_clean();
+        require $path; // Executa o arquivo .phtml
+        $output = ob_get_clean(); // Pega tudo que foi "gravado" e limpa
         if ($output === false) {
             throw new \RuntimeException("Falha ao capturar o buffer de saída.");
         }

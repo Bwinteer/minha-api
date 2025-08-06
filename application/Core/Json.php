@@ -1,12 +1,12 @@
 <?php
 namespace BrunaW\MinhaApi\Core;
-
 class Json {
     private string $json;
     private function __construct(string $output) {
         $this->json = $output;
     }
 
+    //mantém as respostas padronizadas
     public static function make($data = [], int $status = 200): Json {
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");

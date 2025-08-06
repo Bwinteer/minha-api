@@ -34,12 +34,12 @@
 
         function criarUsuario() {
             const dados = {
-                nome: 'Bruna Winter',
-                email: 'brunaw20@api.com',
+                nome: 'Luiz Carlos',
+                email: 'luiz0@api.com',
                 telefone: '(11) 99999-9999'
             };
 
-            fetch('/usuarios', {
+            fetch('/usuarios/criar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)

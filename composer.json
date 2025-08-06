@@ -3,7 +3,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Brunaw\\MinhaApi\\": "application/"
+            "BrunaW\\MinhaApi\\": "application/"
         }
     },
     "authors": [
@@ -12,5 +12,8 @@
             "email": "bruna.winter@datafrete.com.br"
         }
     ],
-    "require": {}
+    "require": {},
+    "scripts": {
+        "serve": "php -S localhost:8000 -t public/"
+    }
 }

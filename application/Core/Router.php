@@ -1,6 +1,5 @@
 <?php
 namespace BrunaW\MinhaApi\Core;
-
 class Router {
     private $routes = [];
 

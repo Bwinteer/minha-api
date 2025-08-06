@@ -19,33 +19,37 @@ $method = $_SERVER['REQUEST_METHOD'];
 // Pegar o ID da URL (se existir)
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-switch($method) {
+switch ($method) {
     case 'GET':
-        if($id) {
+        if ($id) {
             // GET com ID = buscar um usuário específico
             $controller->buscarUsuario($id);
         } else {
             // GET sem ID = listar todos os usuários
             $controller->listarUsuarios();
         }
-        break;     
+        break;
+
     case 'POST':
         $controller->criarUsuario();
         break;
+
     case 'PUT':
-        if($id) {
+        if ($id) {
             $controller->atualizarUsuario($id);
         } else {
             echo json_encode(["message" => "ID é obrigatório para atualizar"]);
         }
         break;
+
     case 'DELETE':
-        if($id) {
+        if ($id) {
             $controller->deletarUsuario($id);
         } else {
             echo json_encode(["message" => "ID é obrigatório para deletar"]);
         }
         break;
+
     default:
         echo json_encode(["message" => "Método não permitido"]);
         break;

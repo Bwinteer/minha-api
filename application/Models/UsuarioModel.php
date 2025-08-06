@@ -1,7 +1,6 @@
 <?php
 namespace BrunaW\MinhaApi\Models;
 use PDO;
-
 class UsuarioModel {
     private $conn;
     private $table_name = "usuarios";
@@ -112,3 +111,4 @@ class UsuarioModel {
         return false;
     }
 }
+?>
