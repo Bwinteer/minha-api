@@ -15,6 +15,7 @@
     <button onclick="listarProjetos()">Listar Projetos</button>
     <button onclick="criarProjeto()">Criar Projeto</button>
     <button onclick="buscarProjeto()">Buscar Projeto ID 1</button>
+    <button onclick="deletarProjeto()">Deletar Projeto</button>
 
     <h2>Tarefas</h2>
     <button onclick="listarTarefas()">Listar Tarefas</button>
@@ -88,8 +89,6 @@
             const dados = {
                 nome: 'Projeto Atualizado',
                 descricao: 'Descrição atualizada via API',
-                data_inicio: '2025-08-01',
-                data_fim: '2025-09-30'
             };
 
             fetch('/projetos/atualizar/1', {
@@ -103,20 +102,19 @@
         }
 
         function deletarProjeto() {
-            if (confirm('Tem certeza que deseja deletar o projeto ID 1?')) {
-                fetch('/projetos/delete/1', {
-                    method: 'DELETE'
-                })
-                .then(r => r.json())
-                .then(d => mostrarResultado('Projeto deletado', d))
-                .catch(e => mostrarErro('Erro ao deletar projeto', e));
-            }
+            fetch('/projetos/delete/5', {
+                method: 'DELETE'
+            })
+            .then(r => r.json())
+            .then(d => mostrarResultado('Projeto deletado', d))
+            .catch(e => mostrarErro('Erro ao deletar projeto', e));
         }
 
         function listarTarefas() {
             fetch('/tarefas')
                 .then(r => r.json())
-                .then(d => mostrarResultado('Tarefas', d));
+                .then(d => mostrarResultado('Lista de Tarefas', d))
+                .catch(e => mostrarErro('Erro ao listar tarefas', e));
         }
 
         function criarTarefa() {
@@ -130,19 +128,21 @@
                 usuario_id: 1
             };
 
-            fetch('/tarefas', {
+            fetch('/tarefas/criar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
             })
             .then(r => r.json())
-            .then(d => mostrarResultado('Tarefa criada', d));
+            .then(d => mostrarResultado('Tarefa criada', d))
+            .catch(e => mostrarErro('Erro ao criar tarefa', e));
         }
 
         function buscarTarefa() {
-            fetch('/tarefas?id=1')
+            fetch('/tarefas/1')
                 .then(r => r.json())
-                .then(d => mostrarResultado('Tarefa ID 1', d));
+                .then(d => mostrarResultado('Tarefa ID 1', d))
+                .catch(e => mostrarErro('Erro ao buscar tarefa', e));
         }
 
         function mostrarResultado(titulo, dados) {

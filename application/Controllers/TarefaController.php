@@ -10,6 +10,11 @@ class TarefaController {
         $this->tarefaService = new TarefaService();
     }
 
+    public function listarTarefas() {
+        $tarefas = $this->tarefaService->listarTodasTarefas();
+        echo json_encode($tarefas ?: ["message" => "Nenhuma tarefa encontrada"]);
+    }
+
     public function listarTarefasPorProjeto($projeto_id) {
         $tarefas = $this->tarefaService->listarPorProjeto($projeto_id);
         echo json_encode($tarefas ?: ["message" => "Nenhuma tarefa encontrada para este projeto"]);

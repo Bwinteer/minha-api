@@ -47,6 +47,17 @@ class TarefaModel {
         return $stmt->execute();
     }
 
+    public function read() {
+        $query = "SELECT id, titulo, descricao, status, prioridade, data_vencimento, projeto_id, usuario_id, created_at 
+                  FROM " . $this->table_name . " 
+                  ORDER BY data_vencimento ASC, created_at DESC";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     public function readByProjeto($projeto_id) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE projeto_id = :projeto_id ORDER BY data_vencimento";
 
