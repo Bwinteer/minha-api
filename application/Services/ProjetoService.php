@@ -27,7 +27,7 @@ class ProjetoService {
                 'id' => $this->projetoModel->id,
                 'nome' => $this->projetoModel->nome,
                 'descricao' => $this->projetoModel->descricao,
-                'data_criacao' => $this->projetoModel->data_criacao
+                'created_at' => $this->projetoModel->created_at
             ];
         }
         return null;

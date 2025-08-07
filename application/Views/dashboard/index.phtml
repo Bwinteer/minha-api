@@ -55,32 +55,62 @@
         }
 
         function listarProjetos() {
-            fetch('api/projetos.php')
+            fetch('/projetos')
                 .then(r => r.json())
-                .then(d => mostrarResultado('Projetos', d));
+                .then(d => mostrarResultado('Lista de Projetos', d))
+                .catch(e => mostrarErro('Erro ao listar projetos', e));
         }
 
         function criarProjeto() {
             const dados = {
-                nome: 'Projeto Exemplo',
-                descricao: 'API teste',
-                data_inicio: '2025-08-01',
-                data_fim: '2025-08-30'
+                nome: 'Projeto Exemplo API',
+                descricao: 'Projeto criado via API para teste',
             };
 
-            fetch('/projetos', {
+            fetch('/projetos/criar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
             })
             .then(r => r.json())
-            .then(d => mostrarResultado('Projeto criado', d));
+            .then(d => mostrarResultado('Projeto criado', d))
+            .catch(e => mostrarErro('Erro ao criar projeto', e));
         }
 
         function buscarProjeto() {
-            fetch('/projetos?id=1')
+            fetch('/projetos/1')
                 .then(r => r.json())
-                .then(d => mostrarResultado('Projeto ID 1', d));
+                .then(d => mostrarResultado('Projeto ID 1', d))
+                .catch(e => mostrarErro('Erro ao buscar projeto', e));
+        }
+
+        function atualizarProjeto() {
+            const dados = {
+                nome: 'Projeto Atualizado',
+                descricao: 'Descrição atualizada via API',
+                data_inicio: '2025-08-01',
+                data_fim: '2025-09-30'
+            };
+
+            fetch('/projetos/atualizar/1', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(r => r.json())
+            .then(d => mostrarResultado('Projeto atualizado', d))
+            .catch(e => mostrarErro('Erro ao atualizar projeto', e));
+        }
+
+        function deletarProjeto() {
+            if (confirm('Tem certeza que deseja deletar o projeto ID 1?')) {
+                fetch('/projetos/delete/1', {
+                    method: 'DELETE'
+                })
+                .then(r => r.json())
+                .then(d => mostrarResultado('Projeto deletado', d))
+                .catch(e => mostrarErro('Erro ao deletar projeto', e));
+            }
         }
 
         function listarTarefas() {
@@ -116,8 +146,22 @@
         }
 
         function mostrarResultado(titulo, dados) {
-            document.getElementById('resultado').innerHTML = 
-                `<h3>${titulo}:</h3><pre>${JSON.stringify(dados, null, 2)}</pre>`;
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = `
+                <h3>✅ ${titulo}</h3>
+                <pre>${JSON.stringify(dados, null, 2)}</pre>
+            `;
+            resultado.style.borderLeftColor = '#28a745';
+        }
+
+        function mostrarErro(titulo, erro) {
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = `
+                <h3>❌ ${titulo}</h3>
+                <pre style="color: #dc3545;">${erro.message || erro}</pre>
+            `;
+            resultado.style.borderLeftColor = '#dc3545';
+            console.error(titulo, erro);
         }
     </script>
 </body>

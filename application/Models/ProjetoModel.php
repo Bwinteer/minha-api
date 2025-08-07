@@ -9,7 +9,7 @@ class ProjetoModel {
     public $id;
     public $nome;
     public $descricao;
-    public $data_criacao;
+    public $created_at;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -39,9 +39,9 @@ class ProjetoModel {
     }
 
     public function read() {
-        $query = "SELECT id, nome, descricao, data_criacao 
+        $query = "SELECT id, nome, descricao, created_at 
                   FROM " . $this->table_name . " 
-                  ORDER BY data_criacao DESC";
+                  ORDER BY created_at DESC";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -50,7 +50,7 @@ class ProjetoModel {
     }
 
     public function readOne() {
-        $query = "SELECT id, nome, descricao, data_criacao 
+        $query = "SELECT id, nome, descricao, created_at 
                   FROM " . $this->table_name . " 
                   WHERE id = :id 
                   LIMIT 0,1";
@@ -64,7 +64,7 @@ class ProjetoModel {
         if ($row) {
             $this->nome = $row['nome'];
             $this->descricao = $row['descricao'];
-            $this->data_criacao = $row['data_criacao'];
+            $this->created_at = $row['created_at'];
             return true;
         }
         return false;
