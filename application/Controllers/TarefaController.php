@@ -11,7 +11,7 @@ class TarefaController {
     }
 
     public function listarTarefas() {
-        $tarefas = $this->tarefaService->listarTodasTarefas();
+        $tarefas = $this->tarefaService->listarTodas();
         echo json_encode($tarefas ?: ["message" => "Nenhuma tarefa encontrada"]);
     }
 

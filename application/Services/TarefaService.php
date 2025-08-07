@@ -19,6 +19,10 @@ class TarefaService {
         return $this->tarefaModel->readByProjeto($projeto_id)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function listarTodas() {
+        return $this->tarefaModel->read()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function buscarPorId($id) {
         $this->tarefaModel->id = $id;
         if ($this->tarefaModel->readOne()) {
