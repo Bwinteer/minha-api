@@ -43,8 +43,8 @@ class TarefaService {
     public function criar($data) {
         $this->tarefaModel->titulo = $data->titulo ?? '';
         $this->tarefaModel->descricao = $data->descricao ?? '';
-        $this->tarefaModel->status = $data->status ?? 'pendente';
-        $this->tarefaModel->prioridade = $data->prioridade ?? 'media';
+        $this->tarefaModel->status = $data->status ?? 'Pendente';
+        $this->tarefaModel->prioridade = $data->prioridade ?? 'Média';
         $this->tarefaModel->data_vencimento = $data->data_vencimento ?? null;
         $this->tarefaModel->projeto_id = $data->projeto_id ?? null;
         $this->tarefaModel->usuario_id = $data->usuario_id ?? null;
@@ -64,8 +64,8 @@ class TarefaService {
         $this->tarefaModel->id = $id;
         $this->tarefaModel->titulo = $data->titulo ?? '';
         $this->tarefaModel->descricao = $data->descricao ?? '';
-        $this->tarefaModel->status = $data->status ?? 'pendente';
-        $this->tarefaModel->prioridade = $data->prioridade ?? 'media';
+        $this->tarefaModel->status = $data->status ?? 'Pendente';
+        $this->tarefaModel->prioridade = $data->prioridade ?? 'Média';
         $this->tarefaModel->data_vencimento = $data->data_vencimento ?? null;
         $this->tarefaModel->usuario_id = $data->usuario_id ?? null;
 

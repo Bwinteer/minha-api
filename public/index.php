@@ -1,5 +1,6 @@
 <?php
 use BrunaW\MinhaApi\Controllers\DashboardController;
+use BrunaW\MinhaApi\Controllers\DashboardTesteController;
 use BrunaW\MinhaApi\Controllers\UsuarioController;
 use BrunaW\MinhaApi\Controllers\ProjetoController;
 use BrunaW\MinhaApi\Controllers\TarefaController;
@@ -7,10 +8,13 @@ use BrunaW\MinhaApi\Core\Router;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $router = new Router();
-$router->get('/', [DashboardController::class, 'index']);
+$router->get('/', [DashboardTesteController::class, 'index']);
 $router->get('/usuarios', [UsuarioController::class, 'listarUsuarios']);
 $router->get('/projetos', [ProjetoController::class,'listarProjetos']);
 $router->get('/tarefas', [TarefaController::class,'listarTarefas']);
+$router->get('/dashboard/tarefas-por-projeto', [DashboardController::class, 'tarefasPorProjeto']);
+$router->get('/dashboard/resumo-geral', [DashboardController::class, 'resumoGeral']);
+// $router->get('/dashboard/completo', [DashboardController::class, 'index']);
 
 // Rotas de Usuários
 $router->get('/usuarios/{id}', function($id) {
