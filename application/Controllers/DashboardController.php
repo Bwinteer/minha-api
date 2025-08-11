@@ -2,6 +2,7 @@
 namespace BrunaW\MinhaApi\Controllers;
 
 use BrunaW\MinhaApi\Services\DashboardService;
+use BrunaW\MinhaApi\Core\View;
 
 class DashboardController {
     private $dashboardService;
@@ -10,7 +11,29 @@ class DashboardController {
         $this->dashboardService = new DashboardService();
     }
 
-    public function index() {
+    // Método para renderizar a página HTML do dashboard
+    public function index(): View {
+        try {
+            $dashboardData = $this->dashboardService->getDashboardCompleto();
+            
+            return View::make('dashboard/dashboard', [
+                'title' => 'Dashboard de Projetos',
+                'resumo_geral' => $dashboardData['resumo_geral'] ?? null,
+                'projetos' => $dashboardData['projetos'] ?? [],
+                'timestamp' => $dashboardData['timestamp'] ?? date('Y-m-d H:i:s'),
+                'success' => true
+            ]);
+        } catch (\Exception $e) {
+            return View::make('dashboard/dashboard', [
+                'title' => 'Dashboard de Projetos',
+                'error' => $e->getMessage(),
+                'success' => false
+            ]);
+        }
+    }
+
+    // APIs JSON (para chamadas AJAX)
+    public function apiInfo() {
         header('Content-Type: application/json');
         echo json_encode([
             "message" => "Dashboard API funcionando!",

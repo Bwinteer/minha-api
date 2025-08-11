@@ -12,9 +12,11 @@ $router->get('/', [DashboardTesteController::class, 'index']);
 $router->get('/usuarios', [UsuarioController::class, 'listarUsuarios']);
 $router->get('/projetos', [ProjetoController::class,'listarProjetos']);
 $router->get('/tarefas', [TarefaController::class,'listarTarefas']);
+
+$router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/dashboard/tarefas-por-projeto', [DashboardController::class, 'tarefasPorProjeto']);
 $router->get('/dashboard/resumo-geral', [DashboardController::class, 'resumoGeral']);
-// $router->get('/dashboard/completo', [DashboardController::class, 'index']);
+$router->get('/dashboard/completo', [DashboardController::class, 'dashboardCompleto']);
 
 // Rotas de Usuários
 $router->get('/usuarios/{id}', function($id) {
